@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <title>Teste Firebase</title>
+    <meta name="theme-color" content="rgb(63, 81, 181)" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Material Design Lite -->
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="app.css" type="text/css" />
+    <script src="javascript/app.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBbGJmwaucZjAgTx4b04SsC5S-62C6jlW8",
+            authDomain: "teste-web-26713.firebaseapp.com",
+            databaseURL: "https://teste-web-26713.firebaseio.com",
+            storageBucket: "teste-web-26713.appspot.com",
+            messagingSenderId: "1033787785625"
+        };
+        firebase.initializeApp(config);
+    </script>
+</head>
+<body>
+    <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+    <!-- Always shows a header, even in smaller screens. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">Title</span>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation. We hide it in small screens. -->
+                <nav class="mdl-navigation mdl-layout--large-screen-only"></nav>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <img class="image_profile" src="imagens/image_profile.png"/>
+            <span id="user_name" class="mdl-layout-title">title</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link">
+                    <svg fill="#757575" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <path d="M16.56 8.94L7.62 0 6.21 1.41l2.38 2.38-5.15 5.15c-.59.59-.59 1.54 0 2.12l5.5 5.5c.29.29.68.44 1.06.44s.77-.15 1.06-.44l5.5-5.5c.59-.58.59-1.53 0-2.12zM5.21 10L10 5.21 14.79 10H5.21zM19 11.5s-2 2.17-2 3.5c0 1.1.9 2 2 2s2-.9 2-2c0-1.33-2-3.5-2-3.5z" />
+                        <path d="M0 20h24v4H0z" fill-opacity=".36" />
+                    </svg>
+                    Tema
+                </a>
+                <a id="settings" class="mdl-navigation__link">
+                    <svg fill="#757575" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z" />
+                    </svg>
+                    Configurações
+                </a>
+                <a id="quickstart-logout" class="mdl-navigation__link">
+                    <svg fill="#757575" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
+                    </svg>
+                    Sair
+                </a>
+            </nav>
+        </div>
+        <main class="mdl-layout__content">
+            <div id="login" class="page-content">
+                <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title mdl-card--expand">
+                        <h2 id="label_signin" class="mdl-card__title-text">Sign in</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        <svg id="ic_error_outline" fill="#f00" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" />
+                        </svg>
+                        <form id="form_name" action="#">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="name">
+                                <label class="mdl-textfield__label" for="name">Nome</label>
+                            </div>
+                        </form>
+                        <form action="#">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="email" id="email">
+                                <label class="mdl-textfield__label" for="email">Email</label>
+                            </div>
+                        </form>
+                        <form action="#">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="password" id="password">
+                                <label class="mdl-textfield__label" for="password">Senha</label>
+                            </div>
+                        </form>
+                        <div id="teste">
+                            <p id="teste_p"></p>
+                        </div>
+                        <div>
+                            <div class="buttons">
+                                <button class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-sign-in-facebook">Facebook</button>
+                                <button class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-sign-in-google">
+                                    <svg fill="#ffffff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92 32" width="68" height="22">
+                                        <path d="M12 24.45C5.67 24.45.35 19.3.35 12.97S5.67 1.49 12 1.49c3.5 0 5.99 1.37 7.87 3.16l-2.21 2.21C16.31 5.6 14.49 4.62 12 4.62c-4.62 0-8.23 3.72-8.23 8.34 0 4.62 3.61 8.34 8.23 8.34 3 0 4.7-1.2 5.8-2.3.9-.9 1.48-2.18 1.71-3.95h-7.5V12h10.56c.11.56.17 1.16.17 1.89 0 2.35-.64 5.26-2.72 7.34-2.03 2.1-4.6 3.22-8.02 3.22zm26.9-7.39c0 4.26-3.32 7.39-7.4 7.39s-7.4-3.14-7.4-7.39c0-4.28 3.32-7.39 7.4-7.39s7.4 3.1 7.4 7.39zm-3.24 0c0-2.66-1.93-4.48-4.16-4.48-2.23 0-4.16 1.82-4.16 4.48 0 2.63 1.93 4.48 4.16 4.48 2.23 0 4.16-1.85 4.16-4.48zm19.24 0c0 4.26-3.32 7.39-7.4 7.39s-7.4-3.14-7.4-7.39c0-4.28 3.32-7.39 7.4-7.39s7.4 3.1 7.4 7.39zm-3.24 0c0-2.66-1.93-4.48-4.16-4.48-2.23 0-4.16 1.82-4.16 4.48 0 2.63 1.93 4.48 4.16 4.48 2.23 0 4.16-1.85 4.16-4.48zM70 10.11v13.27c0 5.46-3.22 7.7-7.03 7.7-3.58 0-5.74-2.41-6.55-4.37l2.83-1.18c.5 1.2 1.74 2.63 3.72 2.63 2.44 0 3.95-1.51 3.95-4.34v-1.06h-.11c-.73.9-2.13 1.68-3.89 1.68-3.7 0-6.92-3.22-6.92-7.36 0-4.17 3.22-7.42 6.92-7.42 1.76 0 3.16.78 3.89 1.65h.11v-1.2H70zm-2.86 6.97c0-2.6-1.74-4.51-3.95-4.51-2.24 0-3.95 1.9-3.95 4.51 0 2.58 1.71 4.45 3.95 4.45 2.22.01 3.95-1.87 3.95-4.45zM75 2.27V24h-3.25V2.27H75zm12.16 17.22l2.52 1.68c-.81 1.2-2.77 3.28-6.16 3.28-4.2 0-7.34-3.25-7.34-7.39 0-4.4 3.16-7.39 6.97-7.39 3.84 0 5.71 3.05 6.33 4.7l.34.84-9.88 4.09c.76 1.48 1.93 2.24 3.58 2.24 1.65 0 2.8-.82 3.64-2.05zm-7.76-2.66l6.61-2.74c-.36-.92-1.46-1.57-2.74-1.57-1.66 0-3.95 1.46-3.87 4.31z" />
+                                    </svg>
+                                </button>
+                            </div>
+                           
+                            <div class="buttons">
+                                <button id="quickstart-sign-in" class="mdl-button mdl-js-button mdl-button--raised">
+                                    entrar
+                                </button>
+                                <button id="quickstart-sign-up" class="mdl-button mdl-js-button mdl-button--raised">
+                                    criar
+                                </button>
+                            </div>
+                            <div class="buttons">
+                                <a id="quickstart-password-reset" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                                    esqueceu a senha?
+                                </a>
+                            </div>
+                        </div>
+                        <div class="fb-like"
+                            data-share="false"
+                            data-width="450"
+                            data-show-faces="false">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="demo-snackbar-example" class="mdl-js-snackbar mdl-snackbar">
+                <img id="image_profile_snackbar" class="image_profile"/>
+                <div class="mdl-snackbar__text"></div>
+                <button class="mdl-snackbar__action" type="button"></button>
+            </div>           
+        </main>
+    </div>
+</body>
+</html>

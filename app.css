@@ -1,0 +1,124 @@
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*="demo"] {
+        width: 90%;
+    }
+
+    [class*="mdl-textfield" ] {
+        //width: 100%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    /* For mobile phones: */
+    [class*="demo" ] {
+        width: 320px;
+    }
+}
+
+.demo-card-square {
+    position: relative;
+    margin: 20px;
+}
+
+.demo-card-square > .mdl-card__title {
+    color: #fff;
+    background: url(imagens/dog.png) bottom right 15% no-repeat #3f51b5;
+    ;
+}
+
+body {
+    background: #fafafa;
+    position: relative;
+}
+
+.buttons {
+    float: right;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.mdl-button {
+    margin-left: 4px;
+}
+
+.demo-card-square {
+    position: absolute;
+    height: 440px;
+}
+
+header {
+    visibility: hidden;
+}
+
+.mdl-spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+}
+
+.image_profile {
+    position: relative;
+    margin: 14px;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+
+#user_name {
+    font-size: 1em;
+}
+
+.mdl-layout__header {
+    position: absolute;
+    width: 100%;
+}
+
+#ic_error_outline {
+    position: absolute;
+    z-index: 5;
+}
+
+#teste {
+    position: absolute;
+    z-index: 5;
+    background-color: black;
+    max-width: 80%;
+    height: auto;
+    border-radius: 4%;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+}
+
+#teste_p {
+    text-align: justify;
+    color: white;
+    margin: 4px;
+    font-size: 0.9em;
+}
+
+#quickstart-sign-in-google {
+    position: relative;
+    background-color: red;
+    color: white;
+}
+
+.fb-like {
+    position: absolute;
+    float: left;
+}
+
+#quickstart-sign-in-facebook {
+    position: relative;
+    background-color: #2f54a3;
+    color: white;
+}
+
+#image_profile_snackbar {
+    width: 40px;
+    height: 40px;
+}
+
+.mdl-textfield{
+    width:100%;
+}
