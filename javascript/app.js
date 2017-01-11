@@ -1,3 +1,6 @@
+function focusedText() {
+    $("#teste, #ic_error_outline").slideUp(500);
+}
 function snackbarShow(message, actionText) {
     var notification = document.querySelector('.mdl-js-snackbar');
     var data = {
@@ -26,15 +29,13 @@ function snackbarShowVerification(message, actionText) {
 }
 
 function showAlert(element, message) {
-    var position = $("#" + element + "").offset();
-    $("#teste").css({ "right": position.left, "top": position.top + 16});
-    $("#ic_error_outline").css({ "right": position.left, "top": position.top - 12 });
+    $("#teste, ic_error_outline").hide();
+    var position = document.getElementById(element).getBoundingClientRect();
+    $("#teste").css("top", position.top + 6);
+    $("#ic_error_outline").css("top", position.top - 12);
     $("#teste_p").text(message);
+    $("#teste").slideDown(500);
     $("#ic_error_outline").show();
-    $("#teste").slideDown(500).delay(1500).slideUp(500, function (event) {
-        $("#ic_error_outline").hide();
-    });
-
 }
 
 function writeUserData(userId, name, email, photoURL) {
@@ -51,7 +52,6 @@ function toggleLogout() {
 
 function handleSignUp() {
     $("#label_signin").text("Sign Up");
-    $("#form_name").show(500);
 
     var name = document.getElementById('name').value;
     var email = document.getElementById('email').value;
@@ -171,6 +171,9 @@ function initApp() {
             $("header").css("visibility", "hidden");
         }
     });
+    document.getElementById('name').addEventListener('focus', focusedText, false);
+    document.getElementById('email').addEventListener('focus', focusedText, false);
+    document.getElementById('password').addEventListener('focus', focusedText, false);
     document.getElementById('quickstart-logout').addEventListener('click', toggleLogout, false);
     document.getElementById('quickstart-sign-in').addEventListener('click', toggleSignIn, false);
     document.getElementById('quickstart-sign-in-google').addEventListener('click', toggleSignInGoogle, false);
@@ -180,8 +183,6 @@ function initApp() {
 }
 function toggleSignIn() {
     $("#label_signin").text("Sign In");
-    $("#form_name").hide(500);
-
 
     if (firebase.auth().currentUser) {
         firebase.auth().signOut();
@@ -296,8 +297,7 @@ window.fbAsyncInit = function () {
 };
 
 function mainPageOpen() {
-  // Adicionar isto ao gerenciador de onclick do botão
-  FB.AppEvents.logEvent("mainPageOpen");
+    FB.AppEvents.logEvent("mainPageOpen");
 }
 
 (function (d, s, id) {
@@ -309,6 +309,6 @@ function mainPageOpen() {
 }(document, 'script', 'facebook-jssdk'));
 
 window.onload = function () {
-    $("#teste, #form_name, #ic_error_outline, .mdl-spinner").hide();
+    $("#teste, #ic_error_outline, .mdl-spinner").hide();
     initApp();
 };

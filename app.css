@@ -1,18 +1,13 @@
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
-    [class*="demo"] {
-        width: 90%;
-    }
-
-    [class*="mdl-textfield" ] {
-        //width: 100%;
+    .demo-card-square{
+        width: 98%;
     }
 }
 
 @media only screen and (min-width: 768px) {
-    /* For mobile phones: */
-    [class*="demo" ] {
-        width: 320px;
+    .demo-card-square{
+        width: 760px;
     }
 }
 
@@ -77,11 +72,13 @@ header {
 
 #ic_error_outline {
     position: absolute;
+    right: 60px;
     z-index: 5;
 }
 
 #teste {
     position: absolute;
+    right: 60px;
     z-index: 5;
     background-color: black;
     max-width: 80%;
