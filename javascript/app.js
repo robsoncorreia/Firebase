@@ -58,19 +58,19 @@ function handleSignUp() {
     var password = document.getElementById('password').value;
 
     if (name.length < 4) {
-        var message = 'Por favor insira um nome com no mínimo 4 caracteres.';
+        var message = 'Por favor insira um nome com no mÃ­nimo 4 caracteres.';
         var actionText = 'OK';
         showAlert('name', message);
         return;
     }
     else if (email.length < 4) {
-        var message = 'Por favor insira um endereço de email.';
+        var message = 'Por favor insira um endereÃ§o de email.';
         var actionText = 'OK';
         showAlert('email', message);
         return;
     }
     else if (password.length < 6) {
-        var message = 'A senha deve ter no mínimo 6 caracteres.';
+        var message = 'A senha deve ter no mÃ­nimo 6 caracteres.';
         var actionText = 'OK';
         showAlert('password', message);
         return;
@@ -91,7 +91,7 @@ function handleSignUp() {
                 writeUserData(uid, displayName, email, photoURL);
 
                 email = document.getElementById('email').value;
-                var message = 'Conta criada. Email de vericação enviado para ' + email;
+                var message = 'Conta criada. Email de vericaÃ§Ã£o enviado para ' + email;
                 var actionText = 'OK';
                 snackbarShowVerification(message, actionText);
             }, function (error) {
@@ -104,12 +104,12 @@ function handleSignUp() {
         var errorMessage = error.message;
 
         if (errorCode === 'auth/email-already-in-use') {
-            var message = 'O endereço de email já¡ foi usado em outra conta.';
+            var message = 'O endereÃ§o de email jÃ¡Â¡ foi usado em outra conta.';
             var actionText = 'OK';
             showAlert('email', message);
         }
         else if (errorCode === 'auth/weak-password') {
-            var message = 'A senha deve ter no mínimo 6 caracteres.';
+            var message = 'A senha deve ter no mÃ­nimo 6 caracteres.';
             var actionText = 'OK';
             showAlert('password', message);
         }
@@ -123,7 +123,7 @@ function handleSignUp() {
 function sendPasswordReset() {
     var email = document.getElementById('email').value;
     if (email.length < 4) {
-        var message = 'Por favor insira um endereço de email.';
+        var message = 'Por favor insira um endereÃ§o de email.';
         var actionText = 'OK';
         showAlert('email', message);
         return;
@@ -131,18 +131,18 @@ function sendPasswordReset() {
     $(".mdl-spinner").show();
     firebase.auth().sendPasswordResetEmail(email).then(function () {
         $(".mdl-spinner").hide();
-        var message = 'Email de redefinição de senha enviado para ' + email;
+        var message = 'Email de redefiniÃ§Ã£o de senha enviado para ' + email;
         var actionText = 'OK';
     }).catch(function (error) {
         $(".mdl-spinner").hide();
         var errorCode = error.code;
         var errorMessage = error.message;
         if (errorCode == 'auth/invalid-email') {
-            var message = 'Digite um email válido.';
+            var message = 'Digite um email vÃ¡lido.';
             var actionText = 'OK';
             showAlert('email', message);
         } else if (errorCode == 'auth/user-not-found') {
-            var message = 'Não há¡ registro de usuário correspondente a esse email.';
+            var message = 'NÃ£o hÃ¡Â¡ registro de usuÃ¡rio correspondente a esse email.';
             var actionText = 'OK';
             showAlert('email', message);
         } else {
@@ -172,7 +172,7 @@ function initApp() {
                 snackbarShow(message, actionText);
             }
             else {
-                var message = 'Conta não verificada. Reenviar verificação para ' + email + '?';
+                var message = 'Conta nÃ£o verificada. Reenviar verificaÃ§Ã£o para ' + email + '?';
                 var actionText = 'enviar';
                 snackbarShowVerification(message, actionText);
             }
@@ -200,7 +200,7 @@ function toggleSignIn() {
         var email = document.getElementById('email').value;
         var password = document.getElementById('password').value;
         if (email.length < 4) {
-            var message = 'Por favor insira um endereço de email.';
+            var message = 'Por favor insira um endereÃ§o de email.';
             var actionText = 'OK';
             showAlert('email', message);
             return;
@@ -225,7 +225,7 @@ function toggleSignIn() {
                 showAlert('password', message);
             }
             else if (errorCode === 'auth/user-not-found') {
-                var message = 'Não há registro de usuário correspondente a esse email.';
+                var message = 'NÃ£o hÃ¡ registro de usuÃ¡rio correspondente a esse email.';
                 var actionText = 'OK';
                 showAlert('email', message);
             } else {
