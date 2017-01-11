@@ -58,19 +58,19 @@ function handleSignUp() {
     var password = document.getElementById('password').value;
 
     if (name.length < 4) {
-        var message = 'Por favor insira um nome com no mínimo 4 caracteres.';
+        var message = 'Por favor insira um nome com no mÃ­nimo 4 caracteres.';
         var actionText = 'OK';
         showAlert('name', message);
         return;
     }
     else if (email.length < 4) {
-        var message = 'Por favor insira um endereço de email.';
+        var message = 'Por favor insira um endereÃ§o de email.';
         var actionText = 'OK';
         showAlert('email', message);
         return;
     }
     else if (password.length < 6) {
-        var message = 'A senha deve ter no mínimo 6 caracteres.';
+        var message = 'A senha deve ter no mÃ­nimo 6 caracteres.';
         var actionText = 'OK';
         showAlert('password', message);
         return;
@@ -90,10 +90,6 @@ function handleSignUp() {
 
                 writeUserData(uid, displayName, email, photoURL);
 
-                email = document.getElementById('email').value;
-                var message = 'Conta criada. Email de vericação enviado para ' + email;
-                var actionText = 'OK';
-                snackbarShowVerification(message, actionText);
             }, function (error) {
                 $(".mdl-spinner").hide();
             });
@@ -104,12 +100,12 @@ function handleSignUp() {
         var errorMessage = error.message;
 
         if (errorCode === 'auth/email-already-in-use') {
-            var message = 'O endereço de email já¡ foi usado em outra conta.';
+            var message = 'O endereÃ§o de email jÃ¡Â¡ foi usado em outra conta.';
             var actionText = 'OK';
             showAlert('email', message);
         }
         else if (errorCode === 'auth/weak-password') {
-            var message = 'A senha deve ter no mínimo 6 caracteres.';
+            var message = 'A senha deve ter no mÃ­nimo 6 caracteres.';
             var actionText = 'OK';
             showAlert('password', message);
         }
@@ -123,7 +119,7 @@ function handleSignUp() {
 function sendPasswordReset() {
     var email = document.getElementById('email').value;
     if (email.length < 4) {
-        var message = 'Por favor insira um endereço de email.';
+        var message = 'Por favor insira um endereÃ§o de email.';
         var actionText = 'OK';
         showAlert('email', message);
         return;
@@ -131,18 +127,18 @@ function sendPasswordReset() {
     $(".mdl-spinner").show();
     firebase.auth().sendPasswordResetEmail(email).then(function () {
         $(".mdl-spinner").hide();
-        var message = 'Email de redefinição de senha enviado para ' + email;
+        var message = 'Email de redefiniÃ§Ã£o de senha enviado para ' + email;
         var actionText = 'OK';
     }).catch(function (error) {
         $(".mdl-spinner").hide();
         var errorCode = error.code;
         var errorMessage = error.message;
         if (errorCode == 'auth/invalid-email') {
-            var message = 'Digite um email válido.';
+            var message = 'Digite um email vÃ¡lido.';
             var actionText = 'OK';
             showAlert('email', message);
         } else if (errorCode == 'auth/user-not-found') {
-            var message = 'Não há¡ registro de usuário correspondente a esse email.';
+            var message = 'NÃ£o hÃ¡Â¡ registro de usuÃ¡rio correspondente a esse email.';
             var actionText = 'OK';
             showAlert('email', message);
         } else {
@@ -154,6 +150,7 @@ function sendPasswordReset() {
 function initApp() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
+            mainPageOpen();
             var displayName = user.displayName;
             var email = user.email;
             var emailVerified = user.emailVerified;
@@ -161,21 +158,13 @@ function initApp() {
             var uid = user.uid;
             var providerData = user.providerData;
             var photoURL = user.photoURL == null ? 'imagens/image_profile.png' : user.photoURL;
-
-            if (emailVerified) {
-                $(".image_profile").attr("src", photoURL);
-                $("#user_name").text(displayName);
-                $("#login").hide(500);
-                $("header").css("visibility", "visible");
-                var message = 'Bem vindo ' + displayName + '!';
-                var actionText = ':)';
-                snackbarShow(message, actionText);
-            }
-            else {
-                var message = 'Conta não verificada. Reenviar verificação para ' + email + '?';
-                var actionText = 'enviar';
-                snackbarShowVerification(message, actionText);
-            }
+            $(".image_profile").attr("src", photoURL);
+            $("#user_name").text(displayName);
+            $("#login").hide(500);
+            $("header").css("visibility", "visible");
+            var message = 'Bem vindo ' + displayName + '!';
+            var actionText = ':)';
+            snackbarShow(message, actionText);
         }
         else {
             $("#login").show(500);
@@ -200,7 +189,7 @@ function toggleSignIn() {
         var email = document.getElementById('email').value;
         var password = document.getElementById('password').value;
         if (email.length < 4) {
-            var message = 'Por favor insira um endereço de email.';
+            var message = 'Por favor insira um endereÃ§o de email.';
             var actionText = 'OK';
             showAlert('email', message);
             return;
@@ -225,7 +214,7 @@ function toggleSignIn() {
                 showAlert('password', message);
             }
             else if (errorCode === 'auth/user-not-found') {
-                var message = 'Não há registro de usuário correspondente a esse email.';
+                var message = 'NÃ£o hÃ¡ registro de usuÃ¡rio correspondente a esse email.';
                 var actionText = 'OK';
                 showAlert('email', message);
             } else {
@@ -267,24 +256,33 @@ function toggleSignInGoogle() {
 }
 
 function toggleSignInFacebook() {
+    $(".mdl-spinner").show();
     if (!firebase.auth().currentUser) {
         var provider = new firebase.auth.FacebookAuthProvider();
         provider.addScope('user_birthday');
         firebase.auth().signInWithPopup(provider).then(function (result) {
+            $(".mdl-spinner").hide();
             var token = result.credential.accessToken;
             var user = result.user;
+            var uid = user.uid;
+            var email = user.email;
+            var displayName = user.displayName;
+            var photoURL = user.photoURL === null ? 'imagens/image_profile.png' : user.photoURL;
+
+            writeUserData(uid, displayName, email, photoURL);
+
+            }, function (error) {
+                $(".mdl-spinner").hide();
         }).catch(function (error) {
+            $(".mdl-spinner").hide();
             var errorCode = error.code;
             var errorMessage = error.message;
             var email = error.email;
             var credential = error.credential;
-            if (errorCode === 'auth/account-exists-with-different-credential') {
-                alert('You have already signed up with a different auth provider for that email.');
-            } else {
-                console.error(error);
-            }
+            console.error(error);
         });
     } else {
+        $(".mdl-spinner").hide();
         firebase.auth().signOut();
     }
 }
@@ -296,6 +294,11 @@ window.fbAsyncInit = function () {
         version: 'v2.8'
     });
 };
+
+function mainPageOpen() {
+  // Adicionar isto ao gerenciador de onclick do botÃ£o
+  FB.AppEvents.logEvent("mainPageOpen");
+}
 
 (function (d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
